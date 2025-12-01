@@ -1,0 +1,6 @@
+package com.ufg.garcomeletronico.repositories;
+
+import com.ufg.garcomeletronico.entities.Conta;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ContaRepository extends JpaRepository<Conta, Long> { }
