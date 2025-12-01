@@ -4,6 +4,8 @@ import com.ufg.garcomeletronico.enums.TipoPagamentoEnum;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Data
 @Entity
 @Table(name = "pagamentos")
@@ -15,6 +17,8 @@ public class Pagamento {
 
     @Enumerated(EnumType.STRING)
     private TipoPagamentoEnum tipo;
+
+    private LocalDateTime horaPagamento;
 
     private Integer numeroTransacao;
 
