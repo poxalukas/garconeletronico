@@ -82,4 +82,10 @@ public class ItemCardapioService {
         return item;
     }
 
+    // Listar itens do cardápio filtrando por ingredientes
+    public List<ItemCardapioDTO> listarPorIngredientes(List<String> ingredientes) {
+        return repository.findByIngredientesIn(ingredientes).stream()
+            .map(EntityDTOConverter::toItemCardapioDTO)
+            .toList();
+    }
 }
