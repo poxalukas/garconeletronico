@@ -1,6 +1,6 @@
 package com.ufg.garcomeletronico.controllers;
 
-import com.ufg.garcomeletronico.entities.Restaurante;
+import com.ufg.garcomeletronico.dto.RestauranteDTO;
 import com.ufg.garcomeletronico.services.RestauranteService;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -16,19 +16,27 @@ public class RestauranteController {
     }
 
     @GetMapping
-    public List<Restaurante> findAll() { return service.findAll(); }
+    public List<RestauranteDTO> findAll() {
+        return service.findAll();
+    }
 
     @GetMapping("/{id}")
-    public Restaurante findById(@PathVariable Long id) { return service.findById(id); }
+    public RestauranteDTO findById(@PathVariable Long id) {
+        return service.findById(id);
+    }
 
     @PostMapping
-    public Restaurante create(@RequestBody Restaurante restaurante) { return service.create(restaurante); }
+    public RestauranteDTO create(@RequestBody RestauranteDTO restaurante) {
+        return service.create(restaurante);
+    }
 
     @PutMapping("/{id}")
-    public Restaurante update(@PathVariable Long id, @RequestBody Restaurante restaurante) {
+    public RestauranteDTO update(@PathVariable Long id, @RequestBody RestauranteDTO restaurante) {
         return service.update(id, restaurante);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) { service.delete(id); }
+    public void delete(@PathVariable Long id) {
+        service.delete(id);
+    }
 }

@@ -1,8 +1,9 @@
 package com.ufg.garcomeletronico.controllers;
 
-import com.ufg.garcomeletronico.entities.Gerente;
+import com.ufg.garcomeletronico.dto.GerenteDTO;
 import com.ufg.garcomeletronico.services.GerenteService;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -16,19 +17,27 @@ public class GerenteController {
     }
 
     @GetMapping
-    public List<Gerente> findAll() { return service.findAll(); }
+    public List<GerenteDTO> findAll() {
+        return service.findAll();
+    }
 
     @GetMapping("/{id}")
-    public Gerente findById(@PathVariable Long id) { return service.findById(id); }
+    public GerenteDTO findById(@PathVariable Long id) {
+        return service.findById(id);
+    }
 
     @PostMapping
-    public Gerente create(@RequestBody Gerente gerente) { return service.create(gerente); }
+    public GerenteDTO create(@RequestBody GerenteDTO dto) {
+        return service.create(dto);
+    }
 
     @PutMapping("/{id}")
-    public Gerente update(@PathVariable Long id, @RequestBody Gerente gerente) {
-        return service.update(id, gerente);
+    public GerenteDTO update(@PathVariable Long id, @RequestBody GerenteDTO dto) {
+        return service.update(id, dto);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) { service.delete(id); }
+    public void delete(@PathVariable Long id) {
+        service.delete(id);
+    }
 }

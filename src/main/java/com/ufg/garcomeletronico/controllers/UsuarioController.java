@@ -1,6 +1,6 @@
 package com.ufg.garcomeletronico.controllers;
 
-import com.ufg.garcomeletronico.entities.Usuario;
+import com.ufg.garcomeletronico.dto.UsuarioDTO;
 import com.ufg.garcomeletronico.services.UsuarioService;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -16,27 +16,27 @@ public class UsuarioController {
     }
 
     @GetMapping
-    public List<Usuario> findAll() {
+    public List<UsuarioDTO> findAll() {
         return service.findAll();
     }
 
     @GetMapping("/{id}")
-    public Usuario findById(@PathVariable Long id) {
+    public UsuarioDTO findById(@PathVariable Long id) {
         return service.findById(id);
     }
 
     @GetMapping("/login/{login}")
-    public Usuario findByLogin(@PathVariable String login) {
+    public UsuarioDTO findByLogin(@PathVariable String login) {
         return service.findByLogin(login);
     }
 
     @PostMapping
-    public Usuario create(@RequestBody Usuario usuario) {
+    public UsuarioDTO create(@RequestBody UsuarioDTO usuario) {
         return service.create(usuario);
     }
 
     @PutMapping("/{id}")
-    public Usuario update(@PathVariable Long id, @RequestBody Usuario usuario) {
+    public UsuarioDTO update(@PathVariable Long id, @RequestBody UsuarioDTO usuario) {
         return service.update(id, usuario);
     }
 

@@ -1,8 +1,10 @@
 package com.ufg.garcomeletronico.controllers;
 
-import com.ufg.garcomeletronico.entities.Garcom;
+import com.ufg.garcomeletronico.dto.GarcomDTO;
+import com.ufg.garcomeletronico.dto.MesaDTO;
 import com.ufg.garcomeletronico.services.GarcomService;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -16,19 +18,40 @@ public class GarcomController {
     }
 
     @GetMapping
-    public List<Garcom> findAll() { return service.findAll(); }
+    public List<GarcomDTO> findAll() {
+        return service.findAll();
+    }
 
     @GetMapping("/{id}")
-    public Garcom findById(@PathVariable Long id) { return service.findById(id); }
+    public GarcomDTO findById(@PathVariable Long id) {
+        return service.findById(id);
+    }
 
     @PostMapping
-    public Garcom create(@RequestBody Garcom garcom) { return service.create(garcom); }
+    public GarcomDTO create(@RequestBody GarcomDTO dto) {
+        return service.create(dto);
+    }
 
     @PutMapping("/{id}")
-    public Garcom update(@PathVariable Long id, @RequestBody Garcom garcom) {
-        return service.update(id, garcom);
+    public GarcomDTO update(@PathVariable Long id, @RequestBody GarcomDTO dto) {
+        return service.update(id, dto);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) { service.delete(id); }
+    public void delete(@PathVariable Long id) {
+        service.delete(id);
+    }
+
+    @GetMapping("/{id}/mesas")
+    public List<MesaDTO> listarMesasDoGarcom(@PathVariable Long id) {
+        return service.listarMesasDoGarcom(id);
+    }
+
+    @PostMapping("/{garcomId}/atribuir-mesa/{mesaId}")
+    public GarcomDTO atribuirMesa(
+            @PathVariable Long garcomId,
+            @PathVariable Long mesaId
+    ) {
+        return service.atribuirMesa(garcomId, mesaId);
+    }
 }

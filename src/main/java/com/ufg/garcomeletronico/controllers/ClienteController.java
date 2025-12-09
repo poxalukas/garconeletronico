@@ -1,8 +1,9 @@
 package com.ufg.garcomeletronico.controllers;
 
-import com.ufg.garcomeletronico.entities.Cliente;
+import com.ufg.garcomeletronico.dto.ClienteDTO;
 import com.ufg.garcomeletronico.services.ClienteService;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -16,19 +17,27 @@ public class ClienteController {
     }
 
     @GetMapping
-    public List<Cliente> findAll() { return service.findAll(); }
+    public List<ClienteDTO> findAll() {
+        return service.findAll();
+    }
 
     @GetMapping("/{id}")
-    public Cliente findById(@PathVariable Long id) { return service.findById(id); }
+    public ClienteDTO findById(@PathVariable Long id) {
+        return service.findById(id);
+    }
 
     @PostMapping
-    public Cliente create(@RequestBody Cliente cliente) { return service.create(cliente); }
+    public ClienteDTO create(@RequestBody ClienteDTO dto) {
+        return service.create(dto);
+    }
 
     @PutMapping("/{id}")
-    public Cliente update(@PathVariable Long id, @RequestBody Cliente cliente) {
-        return service.update(id, cliente);
+    public ClienteDTO update(@PathVariable Long id, @RequestBody ClienteDTO dto) {
+        return service.update(id, dto);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) { service.delete(id); }
+    public void delete(@PathVariable Long id) {
+        service.delete(id);
+    }
 }

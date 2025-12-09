@@ -1,34 +1,72 @@
 package com.ufg.garcomeletronico.controllers;
 
+import com.ufg.garcomeletronico.dto.ContaDTO;
+import com.ufg.garcomeletronico.dto.PagamentoDTO;
+import com.ufg.garcomeletronico.dto.PedidoDTO;
 import com.ufg.garcomeletronico.entities.Conta;
+import com.ufg.garcomeletronico.entities.Pagamento;
 import com.ufg.garcomeletronico.services.ContaService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/contas")
+@RequestMapping("/contas")
 public class ContaController {
 
-    private final ContaService service;
-
-    public ContaController(ContaService service) {
-        this.service = service;
-    }
+    @Autowired
+    private ContaService service;
 
     @GetMapping
-    public List<Conta> findAll() { return service.findAll(); }
-
-    @GetMapping("/{id}")
-    public Conta findById(@PathVariable Long id) { return service.findById(id); }
-
-    @PostMapping
-    public Conta create(@RequestBody Conta conta) { return service.create(conta); }
-
-    @PutMapping("/{id}")
-    public Conta update(@PathVariable Long id, @RequestBody Conta conta) {
-        return service.update(id, conta);
+    public List<ContaDTO> findAll() {
+        return service.findAll();
     }
 
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) { service.delete(id); }
+    @GetMapping("/{id}")
+    public ContaDTO findById(@PathVariable Long id) {
+        return service.findById(id);
+    }
+
+    @PostMapping("/create")
+    public ContaDTO create(@RequestBody ContaDTO dto) {
+        return service.create(dto);
+    }
+
+    @PutMapping("/update/{id}")
+    public ContaDTO update(@PathVariable Long id, @RequestBody ContaDTO dto) {
+        return service.update(id, dto);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void delete(@PathVariable Long id) {
+        service.delete(id);
+    }
+
+    // -------------------- ROTAS PERSONALIZADAS --------------------
+
+    @GetMapping("/mesa/{mesaId}")
+    public List<ContaDTO> findByMesa(@PathVariable Long mesaId) {
+        return service.findByMesa(mesaId);
+    }
+
+    @GetMapping("/{id}/pedidos")
+    public List<PedidoDTO> getPedidosDaConta(@PathVariable Long id) {
+        return service.getPedidos(id);
+    }
+
+    @PostMapping("/abrir/{mesaId}")
+    public ContaDTO abrirConta(@PathVariable Long mesaId, @RequestBody ContaDTO dto) {
+        return service.abrirConta(mesaId, dto);
+    }
+
+    @PostMapping("/fechar/{id}")
+    public ContaDTO fecharConta(@PathVariable Long id) {
+        return service.fecharConta(id);
+    }
+
+    @PostMapping("/{id}/pagamento")
+    public ContaDTO registrarPagamento(@PathVariable Long id, @RequestBody PagamentoDTO pagamento) {
+        return service.registrarPagamento(id, pagamento);
+    }
 }

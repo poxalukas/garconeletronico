@@ -21,4 +21,5 @@ public class ItemCardapio {
 
     @ManyToOne
     private Categoria categoria;
+
 }

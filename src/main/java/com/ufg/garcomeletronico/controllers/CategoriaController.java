@@ -1,8 +1,9 @@
 package com.ufg.garcomeletronico.controllers;
 
-import com.ufg.garcomeletronico.entities.Categoria;
+import com.ufg.garcomeletronico.dto.CategoriaDTO;
 import com.ufg.garcomeletronico.services.CategoriaService;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -16,19 +17,27 @@ public class CategoriaController {
     }
 
     @GetMapping
-    public List<Categoria> findAll() { return service.findAll(); }
+    public List<CategoriaDTO> findAll() {
+        return service.findAll();
+    }
 
     @GetMapping("/{id}")
-    public Categoria findById(@PathVariable Long id) { return service.findById(id); }
+    public CategoriaDTO findById(@PathVariable Long id) {
+        return service.findById(id);
+    }
 
     @PostMapping
-    public Categoria create(@RequestBody Categoria categoria) { return service.create(categoria); }
+    public CategoriaDTO create(@RequestBody CategoriaDTO dto) {
+        return service.create(dto);
+    }
 
     @PutMapping("/{id}")
-    public Categoria update(@PathVariable Long id, @RequestBody Categoria categoria) {
-        return service.update(id, categoria);
+    public CategoriaDTO update(@PathVariable Long id, @RequestBody CategoriaDTO dto) {
+        return service.update(id, dto);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) { service.delete(id); }
+    public void delete(@PathVariable Long id) {
+        service.delete(id);
+    }
 }

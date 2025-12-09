@@ -1,8 +1,9 @@
 package com.ufg.garcomeletronico.controllers;
 
-import com.ufg.garcomeletronico.entities.Caixa;
+import com.ufg.garcomeletronico.dto.CaixaDTO;
 import com.ufg.garcomeletronico.services.CaixaService;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -16,19 +17,27 @@ public class CaixaController {
     }
 
     @GetMapping
-    public List<Caixa> findAll() { return service.findAll(); }
+    public List<CaixaDTO> findAll() {
+        return service.findAll();
+    }
 
     @GetMapping("/{id}")
-    public Caixa findById(@PathVariable Long id) { return service.findById(id); }
+    public CaixaDTO findById(@PathVariable Long id) {
+        return service.findById(id);
+    }
 
     @PostMapping
-    public Caixa create(@RequestBody Caixa caixa) { return service.create(caixa); }
+    public CaixaDTO create(@RequestBody CaixaDTO dto) {
+        return service.create(dto);
+    }
 
     @PutMapping("/{id}")
-    public Caixa update(@PathVariable Long id, @RequestBody Caixa caixa) {
-        return service.update(id, caixa);
+    public CaixaDTO update(@PathVariable Long id, @RequestBody CaixaDTO dto) {
+        return service.update(id, dto);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) { service.delete(id); }
+    public void delete(@PathVariable Long id) {
+        service.delete(id);
+    }
 }

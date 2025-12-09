@@ -1,12 +1,12 @@
 package com.ufg.garcomeletronico.services;
 
+import com.ufg.garcomeletronico.dto.UsuarioDTO;
 import com.ufg.garcomeletronico.entities.Usuario;
 import com.ufg.garcomeletronico.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UsuarioService {
@@ -14,45 +14,43 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository repository;
 
-    // ============================= LISTAR =============================
-    public List<Usuario> findAll() {
-        return repository.findAll();
+    public List<UsuarioDTO> findAll() {
+        return repository.findAll().stream()
+                .map(this::toDTO)
+                .collect(Collectors.toList());
     }
 
-    // ============================= BUSCAR =============================
-    public Usuario findById(Long id) {
-        return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+    public UsuarioDTO findById(Long id) {
+        return toDTO(repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado")));
     }
 
-    public Usuario findByLogin(String login) {
-        return repository.findByLogin(login)
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado pelo login"));
+    public UsuarioDTO findByLogin(String login) {
+        return toDTO(repository.findByLogin(login)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado pelo login")));
     }
 
-    // ============================= CRIAR =============================
-    public Usuario create(Usuario obj) {
-        if (obj == null) throw new IllegalArgumentException("Dados do usuário são obrigatórios");
+    public UsuarioDTO create(UsuarioDTO dto) {
+        if (dto == null) throw new IllegalArgumentException("Dados do usuário são obrigatórios");
 
-        if (obj.getLogin() == null || obj.getLogin().isBlank())
+        if (dto.getLogin() == null || dto.getLogin().isBlank())
             throw new RuntimeException("Login é obrigatório");
 
-        // verificar duplicidade de login
-        if (repository.existsByLogin(obj.getLogin())) {
+        if (repository.existsByLogin(dto.getLogin())) {
             throw new RuntimeException("Já existe um usuário com esse login.");
         }
 
-        return repository.save(obj);
+        Usuario entity = toEntity(dto);
+        return toDTO(repository.save(entity));
     }
 
-    // ============================= ATUALIZAR =============================
-    public Usuario update(Long id, Usuario novosDados) {
-        if (novosDados == null) throw new IllegalArgumentException("Dados do usuário são obrigatórios");
+    public UsuarioDTO update(Long id, UsuarioDTO dto) {
+        if (dto == null) throw new IllegalArgumentException("Dados do usuário são obrigatórios");
 
-        Usuario existente = findById(id);
+        Usuario existente = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
 
-        // validar troca de login (não permitir trocar para um login já existente)
-        String novoLogin = novosDados.getLogin();
+        String novoLogin = dto.getLogin();
         if (novoLogin != null && !novoLogin.isBlank() && !novoLogin.equals(existente.getLogin())) {
             if (repository.existsByLogin(novoLogin)) {
                 throw new RuntimeException("Login já está em uso.");
@@ -60,23 +58,38 @@ public class UsuarioService {
             existente.setLogin(novoLogin);
         }
 
-        // atualizar nome se informado
-        if (novosDados.getNome() != null && !novosDados.getNome().isBlank()) {
-            existente.setNome(novosDados.getNome());
+        if (dto.getNome() != null && !dto.getNome().isBlank()) {
+            existente.setNome(dto.getNome());
         }
 
-        // alterar senha somente se preenchida
-        if (novosDados.getSenha() != null && !novosDados.getSenha().isBlank()) {
-            existente.setSenha(novosDados.getSenha());
+        if (dto.getSenha() != null && !dto.getSenha().isBlank()) {
+            existente.setSenha(dto.getSenha());
         }
 
-        // salvar as alterações (merge seguro)
-        return repository.save(existente);
+        return toDTO(repository.save(existente));
     }
 
-    // ============================= DELETAR =============================
     public void delete(Long id) {
-        Usuario u = findById(id);
+        Usuario u = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
         repository.delete(u);
+    }
+
+    private UsuarioDTO toDTO(Usuario entity) {
+        UsuarioDTO dto = new UsuarioDTO();
+        dto.setId(entity.getId());
+        dto.setNome(entity.getNome());
+        dto.setLogin(entity.getLogin());
+        dto.setSenha(entity.getSenha());
+        return dto;
+    }
+
+    private Usuario toEntity(UsuarioDTO dto) {
+        Usuario entity = new Usuario();
+        entity.setId(dto.getId());
+        entity.setNome(dto.getNome());
+        entity.setLogin(dto.getLogin());
+        entity.setSenha(dto.getSenha());
+        return entity;
     }
 }

@@ -1,8 +1,9 @@
 package com.ufg.garcomeletronico.controllers;
 
-import com.ufg.garcomeletronico.entities.ItemPedido;
+import com.ufg.garcomeletronico.dto.ItemPedidoDTO;
 import com.ufg.garcomeletronico.services.ItemPedidoService;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -16,19 +17,27 @@ public class ItemPedidoController {
     }
 
     @GetMapping
-    public List<ItemPedido> findAll() { return service.findAll(); }
+    public List<ItemPedidoDTO> findAll() {
+        return service.findAll();
+    }
 
     @GetMapping("/{id}")
-    public ItemPedido findById(@PathVariable Long id) { return service.findById(id); }
+    public ItemPedidoDTO findById(@PathVariable Long id) {
+        return service.findById(id);
+    }
 
     @PostMapping
-    public ItemPedido create(@RequestBody ItemPedido item) { return service.create(item); }
+    public ItemPedidoDTO create(@RequestBody ItemPedidoDTO dto) {
+        return service.create(dto);
+    }
 
     @PutMapping("/{id}")
-    public ItemPedido update(@PathVariable Long id, @RequestBody ItemPedido item) {
-        return service.update(id, item);
+    public ItemPedidoDTO update(@PathVariable Long id, @RequestBody ItemPedidoDTO dto) {
+        return service.update(id, dto);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) { service.delete(id); }
+    public void delete(@PathVariable Long id) {
+        service.delete(id);
+    }
 }

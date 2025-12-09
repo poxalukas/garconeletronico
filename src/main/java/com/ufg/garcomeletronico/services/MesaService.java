@@ -1,5 +1,7 @@
 package com.ufg.garcomeletronico.services;
 
+import com.ufg.garcomeletronico.dto.GarcomDTO;
+import com.ufg.garcomeletronico.dto.MesaDTO;
 import com.ufg.garcomeletronico.entities.Garcom;
 import com.ufg.garcomeletronico.entities.Mesa;
 import com.ufg.garcomeletronico.repositories.GarcomRepository;
@@ -18,32 +20,36 @@ public class MesaService {
     @Autowired
     private GarcomRepository garcomRepository;
 
-    // CRUD básico
-    public List<Mesa> findAll() { return repository.findAll(); }
-
-    public Mesa findById(Long id) {
-        return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Mesa não encontrada"));
+    private List<MesaDTO> toDTOList(List<Mesa> list) {
+        return list.stream().map(this::toDTO).toList();
     }
 
-    public Mesa create(Mesa obj) { return repository.save(obj); }
+    public List<MesaDTO> findAll() {
+        return toDTOList(repository.findAll());
+    }
 
-    public Mesa update(Long id, Mesa obj) {
+    public MesaDTO findById(Long id) {
+        return toDTO(repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Mesa não encontrada")));
+    }
+
+    public MesaDTO create(Mesa obj) {
+        return toDTO(repository.save(obj));
+    }
+
+    public MesaDTO update(Long id, Mesa obj) {
         obj.setId(id);
-        return repository.save(obj);
+        return toDTO(repository.save(obj));
     }
 
     public void delete(Long id) {
-        repository.delete(findById(id));
+        repository.delete(
+                repository.findById(id)
+                        .orElseThrow(() -> new RuntimeException("Mesa não encontrada"))
+        );
     }
 
-
-    // ============================
-    // 🔵 ROTAS PERSONALIZADAS
-    // ============================
-
-    // Abrir mesa (por número)
-    public Mesa abrirMesa(int numeroMesa) {
+    public MesaDTO abrirMesa(int numeroMesa) {
         Mesa mesa = repository.findByNumero(numeroMesa)
                 .orElseThrow(() -> new RuntimeException("Mesa não encontrada"));
 
@@ -51,44 +57,66 @@ public class MesaService {
             throw new RuntimeException("Mesa já está ocupada");
 
         mesa.setDisponivel(false);
-        return repository.save(mesa);
+        return toDTO(repository.save(mesa));
     }
 
-    // Fechar mesa
-    public Mesa fecharMesa(Long idMesa) {
-        Mesa mesa = findById(idMesa);
+    public MesaDTO fecharMesa(Long idMesa) {
+        Mesa mesa = repository.findById(idMesa)
+                .orElseThrow(() -> new RuntimeException("Mesa não encontrada"));
+
         mesa.setDisponivel(true);
         mesa.setGarcom(null);
-        return repository.save(mesa);
+
+        return toDTO(repository.save(mesa));
     }
 
-    // Atribuir garçom
-    public Mesa atribuirGarcom(Long idMesa, Long idGarcom) {
-        Mesa mesa = findById(idMesa);
+    public MesaDTO atribuirGarcom(Long idMesa, Long idGarcom) {
+        Mesa mesa = repository.findById(idMesa)
+                .orElseThrow(() -> new RuntimeException("Mesa não encontrada"));
+
         Garcom garcom = garcomRepository.findById(idGarcom)
                 .orElseThrow(() -> new RuntimeException("Garçom não encontrado"));
 
         mesa.setGarcom(garcom);
         mesa.setDisponivel(false);
 
-        return repository.save(mesa);
+        return toDTO(repository.save(mesa));
     }
 
-    // Liberar mesa sem fechar conta
-    public Mesa liberarMesa(Long idMesa) {
-        Mesa mesa = findById(idMesa);
+    public MesaDTO liberarMesa(Long idMesa) {
+        Mesa mesa = repository.findById(idMesa)
+                .orElseThrow(() -> new RuntimeException("Mesa não encontrada"));
+
         mesa.setGarcom(null);
         mesa.setDisponivel(true);
-        return repository.save(mesa);
+
+        return toDTO(repository.save(mesa));
     }
 
-    // Listar mesas disponíveis
-    public List<Mesa> listarDisponiveis() {
-        return repository.findByDisponivelTrue();
+    public List<MesaDTO> listarDisponiveis() {
+        return toDTOList(repository.findByDisponivelTrue());
     }
 
-    // Listar mesas ocupadas
-    public List<Mesa> listarOcupadas() {
-        return repository.findByDisponivelFalse();
+    public List<MesaDTO> listarOcupadas() {
+        return toDTOList(repository.findByDisponivelFalse());
+    }
+
+    private MesaDTO toDTO(Mesa m) {
+        if (m == null) return null;
+
+        GarcomDTO garcomDTO = null;
+        if (m.getGarcom() != null) {
+            garcomDTO = new GarcomDTO(
+                    m.getGarcom().getId(),
+                    m.getGarcom().getNome()
+            );
+        }
+
+        return new MesaDTO(
+                m.getId(),
+                m.getNumero(),
+                m.isDisponivel(),
+                garcomDTO
+        );
     }
 }

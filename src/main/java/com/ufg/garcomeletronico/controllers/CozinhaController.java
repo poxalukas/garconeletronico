@@ -1,8 +1,9 @@
 package com.ufg.garcomeletronico.controllers;
 
-import com.ufg.garcomeletronico.entities.Cozinha;
+import com.ufg.garcomeletronico.dto.CozinhaDTO;
 import com.ufg.garcomeletronico.services.CozinhaService;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -16,19 +17,27 @@ public class CozinhaController {
     }
 
     @GetMapping
-    public List<Cozinha> findAll() { return service.findAll(); }
+    public List<CozinhaDTO> findAll() {
+        return service.findAll();
+    }
 
     @GetMapping("/{id}")
-    public Cozinha findById(@PathVariable Long id) { return service.findById(id); }
+    public CozinhaDTO findById(@PathVariable Long id) {
+        return service.findById(id);
+    }
 
     @PostMapping
-    public Cozinha create(@RequestBody Cozinha cozinha) { return service.create(cozinha); }
+    public CozinhaDTO create(@RequestBody CozinhaDTO cozinha) {
+        return service.create(cozinha);
+    }
 
     @PutMapping("/{id}")
-    public Cozinha update(@PathVariable Long id, @RequestBody Cozinha cozinha) {
+    public CozinhaDTO update(@PathVariable Long id, @RequestBody CozinhaDTO cozinha) {
         return service.update(id, cozinha);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) { service.delete(id); }
+    public void delete(@PathVariable Long id) {
+        service.delete(id);
+    }
 }

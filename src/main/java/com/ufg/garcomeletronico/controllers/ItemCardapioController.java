@@ -1,8 +1,9 @@
 package com.ufg.garcomeletronico.controllers;
 
-import com.ufg.garcomeletronico.entities.ItemCardapio;
+import com.ufg.garcomeletronico.dto.ItemCardapioDTO;
 import com.ufg.garcomeletronico.services.ItemCardapioService;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -16,19 +17,27 @@ public class ItemCardapioController {
     }
 
     @GetMapping
-    public List<ItemCardapio> findAll() { return service.findAll(); }
+    public List<ItemCardapioDTO> findAll() {
+        return service.findAll();
+    }
 
     @GetMapping("/{id}")
-    public ItemCardapio findById(@PathVariable Long id) { return service.findById(id); }
+    public ItemCardapioDTO findById(@PathVariable Long id) {
+        return service.findById(id);
+    }
 
     @PostMapping
-    public ItemCardapio create(@RequestBody ItemCardapio item) { return service.create(item); }
+    public ItemCardapioDTO create(@RequestBody ItemCardapioDTO dto) {
+        return service.create(dto);
+    }
 
     @PutMapping("/{id}")
-    public ItemCardapio update(@PathVariable Long id, @RequestBody ItemCardapio item) {
-        return service.update(id, item);
+    public ItemCardapioDTO update(@PathVariable Long id, @RequestBody ItemCardapioDTO dto) {
+        return service.update(id, dto);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) { service.delete(id); }
+    public void delete(@PathVariable Long id) {
+        service.delete(id);
+    }
 }
