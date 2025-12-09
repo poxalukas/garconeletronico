@@ -40,4 +40,9 @@ public class PagamentoController {
     public void delete(@PathVariable Long id) {
         service.delete(id);
     }
+
+    @DeleteMapping("/excluirFormaPagamento/{id}")
+    public void excluirFormaPagamento(@PathVariable Long id) {
+        pagamentoService.excluirPagamento(id);
+    }
 }
