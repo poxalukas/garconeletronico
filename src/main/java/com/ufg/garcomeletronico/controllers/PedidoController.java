@@ -59,4 +59,14 @@ public class PedidoController {
     public List<PedidoDTO> listarPorConta(@PathVariable Long contaId) {
         return service.listarPorConta(contaId);
     }
+
+    @PostMapping("/criarPedido")
+    public PedidoDTO criarPedido(@RequestBody PedidoDTO dto) {
+        return pedidoService.criarPedido(dto);
+    }
+    
+    @PutMapping("/atualizarPedido/{id}")
+    public PedidoDTO atualizarPedido(@PathVariable Long id, @RequestBody PedidoDTO dto) {
+        return pedidoService.atualizarPedido(id, dto);
+    }
 }
