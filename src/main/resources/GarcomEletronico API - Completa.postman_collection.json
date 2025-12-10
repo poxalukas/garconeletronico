@@ -1,0 +1,2688 @@
+{
+	"info": {
+		"_postman_id": "bbd93026-fd79-4621-a93e-d095a02b3fd1",
+		"name": "GarcomEletronico API - Completa",
+		"description": "Coleção completa de testes para a API GarcomEletronico",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29193416"
+	},
+	"item": [
+		{
+			"name": "ItemPedido",
+			"item": [
+				{
+					"name": "Listar todos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/itens-pedido",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"itens-pedido"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/itens-pedido/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"itens-pedido",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar item",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": null,\n  \"quantidade\": 2,\n  \"itemCardapio\": {\n    \"id\": 1,\n    \"nome\": \"X-Burger\",\n    \"ingredientes\": \"Carne, queijo, pão\",\n    \"preco\": 15.0,\n    \"disponivelCozinha\": true,\n    \"categoria\": {\"id\":1,\"nome\":\"Sanduíches\"}\n  }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/itens-pedido",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"itens-pedido"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar item",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 1,\n  \"quantidade\": 3,\n  \"itemCardapio\": {\n    \"id\": 1,\n    \"nome\": \"X-Burger\",\n    \"ingredientes\": \"Carne, queijo, pão\",\n    \"preco\": 15.0,\n    \"disponivelCozinha\": true,\n    \"categoria\": {\"id\":1,\"nome\":\"Sanduíches\"}\n  }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/itens-pedido/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"itens-pedido",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar item",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/itens-pedido/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"itens-pedido",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pagamento",
+			"item": [
+				{
+					"name": "Listar todos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/pagamentos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pagamentos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /criarFormaPagamento",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": null,\n  \"tipo\": \"CARTAO\",\n  \"numeroTransacao\": 12345,\n  \"numeroCheque\": null\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/criarFormaPagamento",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"criarFormaPagamento"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT /atualizarFormaPagamento",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 1,\n  \"tipo\": \"DINHEIRO\",\n  \"numeroTransacao\": null,\n  \"numeroCheque\": null\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/atualizarFormaPagamento/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"atualizarFormaPagamento",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE /excluirFormaPagamento",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/excluirFormaPagamento/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"excluirFormaPagamento",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pedido",
+			"item": [
+				{
+					"name": "Listar todos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/pedidos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pedidos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/pedidos/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pedidos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /criarPedido",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": null,\n  \"numero\": 1,\n  \"horaPedido\": null,\n  \"horaEntrega\": null,\n  \"cliente\": {\"id\": 1, \"nome\": \"João\"},\n  \"itens\": [{\"id\": 1, \"quantidade\": 2, \"itemCardapio\": {\"id\":1,\"nome\":\"Pizza\",\"preco\":30}}],\n  \"conta\": {\"id\": 1, \"nome\": \"Conta 1\"}\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/criarPedido",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"criarPedido"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Adicionar item ao pedido",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/pedidos/1/add-item/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pedidos",
+								"1",
+								"add-item",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Marcar pedido como entregue",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/pedidos/1/entregar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pedidos",
+								"1",
+								"entregar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar pedido",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"numero\": 1,\n  \"clienteId\": 1,\n  \"itens\": [\n    {\n      \"itemCardapioId\": 1,\n      \"quantidade\": 3\n    }\n  ],\n  \"contaId\": 1\n}\n"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/pedidos/18",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pedidos",
+								"18"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar pedido",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/pedidos/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pedidos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Restaurante",
+			"item": [
+				{
+					"name": "Listar todos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/restaurantes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"restaurantes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar restaurante",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": null,\n  \"nome\": \"Restaurante Central\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/restaurantes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"restaurantes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar restaurante",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 1,\n  \"nome\": \"Restaurante Atualizado\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/restaurantes/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"restaurantes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar restaurante",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/restaurantes/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"restaurantes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Usuario",
+			"item": [
+				{
+					"name": "Listar todos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/usuarios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/usuarios/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"usuarios",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar por login",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/usuarios/login/user1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"usuarios",
+								"login",
+								"user1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar usuário",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": null,\n  \"login\": \"user1\",\n  \"nome\": \"João\",\n  \"senha\": \"123\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/usuarios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar usuário",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"login\": \"user1\",\n  \"nome\": \"João Atualizado\",\n  \"senha\": \"456\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/usuarios/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"usuarios",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar usuário",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/usuarios/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"usuarios",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Clientes",
+			"item": [
+				{
+					"name": "Listar todos Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/itens-pedido",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"itens-pedido"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar por ID Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/itens-pedido/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"itens-pedido",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar item Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"nome\": \"Teste\",\n        \"horaChegada\": null,\n        \"horaSaida\": null\n    }"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/clientes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar item Copy",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 1,\n  \"quantidade\": 3,\n  \"itemCardapio\": {\n    \"id\": 1,\n    \"nome\": \"X-Burger\",\n    \"ingredientes\": \"Carne, queijo, pão\",\n    \"preco\": 15.0,\n    \"disponivelCozinha\": true,\n    \"categoria\": {\"id\":1,\"nome\":\"Sanduíches\"}\n  }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/itens-pedido/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"itens-pedido",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar item Copy",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/clientes/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"clientes",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Endpoints Alternativos",
+			"item": [
+				{
+					"name": "GET /buscarMesas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/buscarMesas",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"buscarMesas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /listarItensPorIngredientes",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\"Tomate\", \"Queijo\"]"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/listarItensPorIngredientes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"listarItensPorIngredientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /listarMesasAtendidasGarcon",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/garcons/listarMesasAtendidasGarcon?garcomId=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"garcons",
+								"listarMesasAtendidasGarcon"
+							],
+							"query": [
+								{
+									"key": "garcomId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /buscarContaCliente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/contas/buscarContaCliente/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"contas",
+								"buscarContaCliente",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /enviarContaParaCaixa",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/contas/enviarContaParaCaixa/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"contas",
+								"enviarContaParaCaixa",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "mesas",
+			"item": [
+				{
+					"name": "GET /mesas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/mesas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"mesas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /mesas/{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/mesas/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"mesas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /mesas",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"numero\": 1, \"status\": \"LIVRE\" }"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/mesas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"mesas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT /mesas/{id}",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"numero\": 1, \"disponivel\": true }"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/mesas/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"mesas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE /mesas/{id}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/mesas/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"mesas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /mesas/abrir/{numeroMesa}",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/mesas/abrir/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"mesas",
+								"abrir",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /mesas/fechar/{idMesa}",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/mesas/fechar/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"mesas",
+								"fechar",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /mesas/atribuir-garcom/{idMesa}/{idGarcom}",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/mesas/atribuir-garcom/1/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"mesas",
+								"atribuir-garcom",
+								"1",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /mesas/liberar/{idMesa}",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/mesas/liberar/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"mesas",
+								"liberar",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /mesas/disponiveis",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/mesas/disponiveis",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"mesas",
+								"disponiveis"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /mesas/ocupadas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/mesas/ocupadas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"mesas",
+								"ocupadas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /mesas/listarMesasAtendidasGarcom",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/mesas/listarMesasAtendidasGarcon?garcomId=6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"mesas",
+								"listarMesasAtendidasGarcon"
+							],
+							"query": [
+								{
+									"key": "garcomId",
+									"value": "6"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Garços",
+			"item": [
+				{
+					"name": "Listar Garçons",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/garcons",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"garcons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Garçom por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/garcons/{{id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"garcons",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar Garçom",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"Carlos Silva\",\n  \"documento\": \"12345678900\",\n  \"telefone\": \"62999998888\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/garcons",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"garcons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Garçom",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": {{id}},\n  \"nome\": \"Carlos Silva Atualizado\",\n  \"documento\": \"12345678900\",\n  \"telefone\": \"62988887777\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/garcons/{{id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"garcons",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir Garçom",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/garcons/{{id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"garcons",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Mesas do Garçom",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/garcons/{{id}}/mesas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"garcons",
+								"{{id}}",
+								"mesas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atribuir Mesa ao Garçom",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/garcons/{{garcomId}}/atribuir-mesa/{{mesaId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"garcons",
+								"{{garcomId}}",
+								"atribuir-mesa",
+								"{{mesaId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Contas",
+			"item": [
+				{
+					"name": "Listar Contas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/contas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"contas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Conta por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "GET http://localhost:8080/contas/1",
+							"protocol": "GET http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"contas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar Conta",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"mesaId\": 1,\n  \"abertaEm\": \"2025-01-10T15:23:00\",\n  \"status\": \"ABERTA\",\n  \"valorTotal\": 0\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/contas//create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"contas",
+								"",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Conta",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"mesaId\": 1,\n  \"status\": \"ABERTA\",\n  \"valorTotal\": 120.50\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/contas/update/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"contas",
+								"update",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir Conta",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/contas/delete/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"contas",
+								"delete",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Contas por Mesa",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/contas/mesa/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"contas",
+								"mesa",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Pedidos da Conta",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/contas/1/pedidos",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"contas",
+								"1",
+								"pedidos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Abrir Conta",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"abertaEm\": \"2025-01-10T12:00:00\",\n  \"status\": \"ABERTA\",\n  \"valorTotal\": 0\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/contas/abrir/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"contas",
+								"abrir",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fechar Conta",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/contas/fechar/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"contas",
+								"fechar",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registrar Pagamento",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"tipo\": \"DINHEIRO\",\n  \"valor\": 50.00,\n  \"pagoEm\": \"2025-01-10T15:30:00\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/contas/1/pagamento",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"contas",
+								"1",
+								"pagamento"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Caixas",
+			"item": [
+				{
+					"name": "Listar caixas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/caixas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"caixas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar caixa por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/caixas/{{id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"caixas",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar caixa",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"Caixa Principal\",\n  \"login\": \"caixa1\",\n  \"senha\": \"123456\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/caixas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"caixas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar caixa",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"Caixa Alterado\",\n  \"login\": \"caixa1\",\n  \"senha\": \"novaSenha\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/caixas/{{id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"caixas",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir caixa",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/caixas/{{id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"caixas",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "cardapio",
+			"item": [
+				{
+					"name": "Listar Cardápios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/cardapios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"cardapios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Cardápio por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/cardapios/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"cardapios",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar Cardápio",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": null,\n  \"itens\": []\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/cardapios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"cardapios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Cardápio",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 1,\n  \"itens\": []\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/cardapios/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"cardapios",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir Cardápio",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/cardapios/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"cardapios",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pedidos",
+			"item": [
+				{
+					"name": "Listar todos os pedidos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/pedidos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pedidos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar pedido por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/pedidos/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pedidos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar pedido (POST /api/pedidos)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"numero\": 1,\n  \"horaPedido\": null,\n  \"horaEntrega\": null,\n  \"cliente\":{\"id\":1},\n  \"itens\": [],\n  \"conta\": {\"id\": 1}\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/pedidos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pedidos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar pedido (PUT /api/pedidos/{id})",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"numero\": 2,\n  \"horaPedido\": null,\n  \"horaEntrega\": null,\n  \"itens\": [],\n  \"conta\": {\"id\": 1}\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/pedidos/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pedidos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir pedido (DELETE /api/pedidos/{id})",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/pedidos/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pedidos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar pedido para uma conta",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"numero\": 3,\n  \"horaPedido\": null,\n  \"horaEntrega\": null,\n  \"itens\": []\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/pedidos/conta/1/novo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pedidos",
+								"conta",
+								"1",
+								"novo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Adicionar item ao pedido",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/pedidos/1/add-item/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pedidos",
+								"1",
+								"add-item",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Marcar pedido como entregue",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/pedidos/1/entregar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pedidos",
+								"1",
+								"entregar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar pedidos por conta",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/pedidos/conta/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pedidos",
+								"conta",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar pedido (endpoint alternativo)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"numero\": 4,\n  \"horaPedido\": null,\n  \"horaEntrega\": null,\n  \"conta\": {\"id\": 1},\n  \"itens\": []\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/pedidos/criarPedido",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pedidos",
+								"criarPedido"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar pedido (endpoint alternativo)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"numero\": 10,\n  \"horaPedido\": null,\n  \"horaEntrega\": null,\n  \"conta\": {\"id\": 1},\n  \"itens\": []\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/pedidos/atualizarPedido/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pedidos",
+								"atualizarPedido",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir pedido (endpoint alternativo)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/pedidos/excluirPedido/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pedidos",
+								"excluirPedido",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar todos os pedidos (alternativo)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/pedidos/buscarPedidos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pedidos",
+								"buscarPedidos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Apresentação",
+			"item": [
+				{
+					"name": "01-buscarMesas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/mesas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"mesas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "02-mesas/listarMesasAtendidasGarcom",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/mesas/listarMesasAtendidasGarcon?garcomId=6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"mesas",
+								"listarMesasAtendidasGarcon"
+							],
+							"query": [
+								{
+									"key": "garcomId",
+									"value": "6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "03 - POST /mesas/atribuir-garcom/{idMesa}/{idGarcom} Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/mesas/atribuir-garcom/1/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"mesas",
+								"atribuir-garcom",
+								"1",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "04 - POST /mesas/liberar/{idMesa} Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/mesas/liberar/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"mesas",
+								"liberar",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "05 - Criar pedido (POST /api/pedidos) Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"numero\": 1,\n  \"horaPedido\": null,\n  \"horaEntrega\": null,\n  \"cliente\":{\"id\":1},\n  \"itens\": [],\n  \"conta\": {\"id\": 1}\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/pedidos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pedidos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "06 - Atualizar pedido (PUT /api/pedidos/{id}) Copy",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 1,\n  \"numero\": 1,\n  \"horaPedido\": \"2025-12-10T15:30:00\",\n  \"horaEntrega\": null,\n  \"cliente\": { \"id\": 1 },\n  \"itens\": [\n    { \"id\": 1, \"quantidade\": 3, \"itemCardapio\": { \"id\": 1 } }\n  ],\n  \"conta\": { \"id\": 1 }\n}\n"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/pedidos/20",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pedidos",
+								"20"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "07 - Excluir pedido (DELETE /api/pedidos/{id}) Copy",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/pedidos/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pedidos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "08 - Buscar todos os pedidos (alternativo) Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/pedidos/buscarPedidos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pedidos",
+								"buscarPedidos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "09 - POST /criarFormaPagamento Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": null,\n  \"tipo\": \"CARTAO\",\n  \"numeroTransacao\": 12345,\n  \"numeroCheque\": null\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/pagamentos/criarFormaPagamento",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pagamentos",
+								"criarFormaPagamento"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "10 - PUT /atualizarFormaPagamento Copy",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 1,\n  \"tipo\": \"DINHEIRO\",\n  \"numeroTransacao\": null,\n  \"numeroCheque\": null\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/atualizarFormaPagamento/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"atualizarFormaPagamento",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "11 - DELETE /excluirFormaPagamento Copy",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/pagamentos/excluirFormaPagamento/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pagamentos",
+								"excluirFormaPagamento",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "12 - POST /listarItensPorIngredientes Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\"Tomate\", \"Queijo\"]"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/itens-cardapio/listarItensPorIngredientes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"itens-cardapio",
+								"listarItensPorIngredientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /mesas/abrir/{numeroMesa} Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/mesas/abrir/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"mesas",
+								"abrir",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /mesas/fechar/{idMesa} Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/mesas/fechar/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"mesas",
+								"fechar",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Mesas do Garçom Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/garcons/{{id}}/mesas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"garcons",
+								"{{id}}",
+								"mesas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atribuir Mesa ao Garçom Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/garcons/{{garcomId}}/atribuir-mesa/{{mesaId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"garcons",
+								"{{garcomId}}",
+								"atribuir-mesa",
+								"{{mesaId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Contas por Mesa Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/contas/mesa/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"contas",
+								"mesa",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Pedidos da Conta Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/contas/1/pedidos",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"contas",
+								"1",
+								"pedidos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registrar Pagamento Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"tipo\": \"DINHEIRO\",\n  \"valor\": 50.00,\n  \"pagoEm\": \"2025-01-10T15:30:00\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/contas/1/pagamento",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"contas",
+								"1",
+								"pagamento"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "{{baseUrl}}",
+			"value": ""
+		}
+	]
+}
