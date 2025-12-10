@@ -1,5 +1,6 @@
 package com.ufg.garcomeletronico.controllers;
 
+import com.ufg.garcomeletronico.dto.ContaDTO;
 import com.ufg.garcomeletronico.dto.MesaDTO;
 import com.ufg.garcomeletronico.entities.Mesa;
 import com.ufg.garcomeletronico.services.MesaService;
@@ -53,7 +54,8 @@ public class MesaController {
     }
 
     @PostMapping("/atribuir-garcom/{idMesa}/{idGarcom}")
-    public MesaDTO atribuirGarcom(@PathVariable Long idMesa, @PathVariable Long idGarcom) {
+    public MesaDTO atribuirGarcom(@PathVariable Long idMesa,
+                                  @PathVariable Long idGarcom) {
         return service.atribuirGarcom(idMesa, idGarcom);
     }
 
@@ -76,5 +78,11 @@ public class MesaController {
     @GetMapping("/buscarMesas")
     public List<MesaDTO> buscarMesas() {
         return service.buscarMesas();
+    }
+
+    // Listar mesas atendidas por garçom
+    @PostMapping("/listarMesasAtendidasGarcon")
+    public List<MesaDTO> listarMesasAtendidasGarcon(@RequestParam Long garcomId) {
+        return service.listarMesasAtendidasGarcon(garcomId);
     }
 }

@@ -204,20 +204,5 @@ public class ContaService {
                 .toList();
     }
 
-    // Listar mesas atendidas por garçom
-    public List<ContaDTO> listarMesasAtendidasGarcon(Long garcomId) {
-        List<Conta> contas = repository.findByGarcomId(garcomId);
-        return contas.stream()
-                .map(converter::toDTO)
-                .toList();
-    }
-
-    // Buscar conta de um cliente
-    public ContaDTO buscarContaPorCliente(Long clienteId) {
-        Conta conta = repository.findByClienteId(clienteId)
-                .orElseThrow(() -> new RuntimeException("Conta não encontrada"));
-        return converter.toDTO(conta);
-    }
-
 
 }

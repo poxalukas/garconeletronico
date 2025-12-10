@@ -70,28 +70,10 @@ public class ContaController {
         return service.registrarPagamento(id, pagamento);
     }
 
-    // Buscar todas as mesas
-    @GetMapping("/buscarMesas")
-    public List<MesaDTO> buscarMesas() {
-        return contaService.buscarMesas();
-    }
-
-    // Listar mesas atendidas por garçom
-    @PostMapping("/listarMesasAtendidasGarcon")
-    public List<ContaDTO> listarMesasAtendidasGarcon(@RequestParam Long garcomId) {
-        return contaService.listarMesasAtendidasGarcon(garcomId);
-    }
-
-    // Buscar conta de um cliente específico
-    @GetMapping("/buscarContaCliente/{clienteId}")
-    public ContaDTO buscarContaCliente(@PathVariable Long clienteId) {
-        return contaService.buscarContaPorCliente(clienteId);
-    }
-
-    // Enviar conta para o caixa
-    @PostMapping("/enviarContaParaCaixa/{contaId}")
-    public void enviarContaParaCaixa(@PathVariable Long contaId) {
-        caixaService.receberConta(contaId);
-    }
+//    // Enviar conta para o caixa
+//    @PostMapping("/enviarContaParaCaixa/{contaId}")
+//    public void enviarContaParaCaixa(@PathVariable Long contaId) {
+//        caixaService.receberConta(contaId);
+//    }
 
 }

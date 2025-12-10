@@ -2,6 +2,7 @@ package com.ufg.garcomeletronico.services;
 
 import com.ufg.garcomeletronico.dto.GarcomDTO;
 import com.ufg.garcomeletronico.dto.MesaDTO;
+import com.ufg.garcomeletronico.entities.Cliente;
 import com.ufg.garcomeletronico.entities.Garcom;
 import com.ufg.garcomeletronico.entities.Mesa;
 import com.ufg.garcomeletronico.repositories.GarcomRepository;
@@ -72,10 +73,10 @@ public class MesaService {
 
     public MesaDTO atribuirGarcom(Long idMesa, Long idGarcom) {
         Mesa mesa = repository.findById(idMesa)
-                .orElseThrow(() -> new RuntimeException("Mesa não encontrada"));
+            .orElseThrow(() -> new RuntimeException("Mesa não encontrada"));
 
         Garcom garcom = garcomRepository.findById(idGarcom)
-                .orElseThrow(() -> new RuntimeException("Garçom não encontrado"));
+            .orElseThrow(() -> new RuntimeException("Garçom não encontrado"));
 
         mesa.setGarcom(garcom);
         mesa.setDisponivel(false);
@@ -123,4 +124,13 @@ public class MesaService {
         return toDTOList(repository.findAll());
     }
 
-}
+    // Listar mesas atendidas por garçom
+    public List<MesaDTO> listarMesasAtendidasGarcon(Long garcomId) {
+        Garcom garcom = new Garcom();
+        garcom.setId(garcomId);
+        List<Mesa> mesas = repository.findByGarcom(garcom);
+        return mesas.stream()
+                .map(this::toDTO)
+                .toList();
+    }
+    }
