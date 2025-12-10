@@ -119,4 +119,8 @@ public class MesaService {
                 garcomDTO
         );
     }
+    public List<MesaDTO> buscarMesas() {
+        return toDTOList(repository.findAll());
+    }
+
 }

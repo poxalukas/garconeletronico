@@ -71,4 +71,10 @@ public class MesaController {
     public List<MesaDTO> listarOcupadas() {
         return service.listarOcupadas();
     }
+
+        // Buscar todas as mesas
+    @GetMapping("/buscarMesas")
+    public List<MesaDTO> buscarMesas() {
+        return service.buscarMesas();
+    }
 }
