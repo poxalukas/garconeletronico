@@ -73,4 +73,14 @@ public class PagamentoService {
                 .orElseThrow(() -> new RuntimeException("Pagamento não encontrado"));
         repository.delete(p);
     }
+
+    public PagamentoDTO criarPagamento(PagamentoDTO dto) {
+        return toDTO(repository.save(toEntity(dto)));
+    }
+
+    public PagamentoDTO atualizarPagamento(Long id, PagamentoDTO dto) {
+        Pagamento entity = toEntity(dto);
+        entity.setId(id);
+        return toDTO(repository.save(entity));
+    }
 }

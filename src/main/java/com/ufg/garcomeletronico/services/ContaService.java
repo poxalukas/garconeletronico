@@ -200,7 +200,7 @@ public class ContaService {
     // Buscar todas as mesas
     public List<MesaDTO> buscarMesas() {
         return mesaRepository.findAll().stream()
-                .map(EntityDTOConverter::toMesaDTO)
+                .map(converter::toMesaDTO)
                 .toList();
     }
 
@@ -208,7 +208,7 @@ public class ContaService {
     public List<ContaDTO> listarMesasAtendidasGarcon(Long garcomId) {
         List<Conta> contas = repository.findByGarcomId(garcomId);
         return contas.stream()
-                .map(EntityDTOConverter::toDTO)
+                .map(converter::toDTO)
                 .toList();
     }
 
@@ -216,7 +216,7 @@ public class ContaService {
     public ContaDTO buscarContaPorCliente(Long clienteId) {
         Conta conta = repository.findByClienteId(clienteId)
                 .orElseThrow(() -> new RuntimeException("Conta não encontrada"));
-        return EntityDTOConverter.toDTO(conta);
+        return converter.toDTO(conta);
     }
 
 

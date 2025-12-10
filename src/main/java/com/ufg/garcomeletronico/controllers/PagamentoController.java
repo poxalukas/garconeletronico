@@ -45,4 +45,13 @@ public class PagamentoController {
     public void excluirFormaPagamento(@PathVariable Long id) {
         service.excluirPagamento(id);
     }
+    @PostMapping("/criarFormaPagamento")
+    public PagamentoDTO criarFormaPagamento(@RequestBody PagamentoDTO dto) {
+        return service.criarPagamento(dto);
+    }
+
+    @PutMapping("/atualizarFormaPagamento/{id}")
+    public PagamentoDTO atualizarFormaPagamento(@PathVariable Long id, @RequestBody PagamentoDTO dto) {
+        return service.atualizarPagamento(id, dto);
+    }
 }
