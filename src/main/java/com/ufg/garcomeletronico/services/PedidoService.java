@@ -112,4 +112,17 @@ public class PedidoService {
         pedido = repository.save(pedido);
         return EntityDTOConverter.toPedidoDTO(pedido);
     }
+
+    public void excluirPedido(Long id) {
+        Pedido pedido = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
+        repository.delete(pedido);
+    }
+
+    public List<PedidoDTO> buscarTodos() {
+        return repository.findAll().stream()
+                .map(EntityDTOConverter::toPedidoDTO)
+                .toList();
+    }
+
 }
