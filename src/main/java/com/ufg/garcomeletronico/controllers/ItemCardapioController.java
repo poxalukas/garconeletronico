@@ -44,6 +44,6 @@ public class ItemCardapioController {
     // Listar itens do cardápio filtrando por ingredientes
     @PostMapping("/listarItensPorIngredientes")
     public List<ItemCardapioDTO> listarItensPorIngredientes(@RequestBody List<String> ingredientes) {
-        return itemCardapioService.listarPorIngredientes(ingredientes);
+        return service.listarPorIngredientes(ingredientes);
     }
 }

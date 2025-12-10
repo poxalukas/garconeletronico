@@ -62,22 +62,22 @@ public class PedidoController {
 
     @PostMapping("/criarPedido")
     public PedidoDTO criarPedido(@RequestBody PedidoDTO dto) {
-        return pedidoService.criarPedido(dto);
+        return service.criarPedido(dto);
     }
     
     @PutMapping("/atualizarPedido/{id}")
     public PedidoDTO atualizarPedido(@PathVariable Long id, @RequestBody PedidoDTO dto) {
-        return pedidoService.atualizarPedido(id, dto);
+        return service.atualizarPedido(id, dto);
     }
 
     @DeleteMapping("/excluirPedido/{id}")
     public void excluirPedido(@PathVariable Long id) {
-        pedidoService.excluirPedido(id);
+        service.excluirPedido(id);
     }
 
     @GetMapping("/buscarPedidos")
     public List<PedidoDTO> buscarPedidos() {
-            return pedidoService.buscarTodos();
+            return service.buscarTodos();
     }
 
 }

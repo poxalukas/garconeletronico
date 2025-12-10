@@ -1,10 +1,16 @@
 package com.ufg.garcomeletronico.services;
 
+import com.ufg.garcomeletronico.converters.EntityDTOConverter;
 import com.ufg.garcomeletronico.dto.PedidoDTO;
-import com.ufg.garcomeletronico.entities.*;
-import com.ufg.garcomeletronico.repositories.*;
+import com.ufg.garcomeletronico.entities.Pedido;
+import com.ufg.garcomeletronico.entities.Conta;
+import com.ufg.garcomeletronico.entities.ItemPedido;
+import com.ufg.garcomeletronico.repositories.ContaRepository;
+import com.ufg.garcomeletronico.repositories.ItemPedidoRepository;
+import com.ufg.garcomeletronico.repositories.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,46 +18,58 @@ import java.util.stream.Collectors;
 @Service
 public class PedidoService {
 
+
     @Autowired
     private PedidoRepository repository;
 
     @Autowired
-    private ContaRepository contaRepository;
+    private  ContaRepository contaRepository;
 
     @Autowired
     private ItemPedidoRepository itemPedidoRepository;
 
+    @Autowired
+    private EntityDTOConverter converter;
+
     public List<PedidoDTO> findAll() {
-        return repository.findAll().stream().map(this::toDTO).collect(Collectors.toList());
+        return repository.findAll()
+                .stream()
+                .map(converter::toPedidoDTO)
+                .collect(Collectors.toList());
     }
 
     public PedidoDTO findById(Long id) {
-        return toDTO(repository.findById(id).orElseThrow(() -> new RuntimeException("Pedido não encontrado")));
+        Pedido pedido = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
+        return converter.toPedidoDTO(pedido);
     }
 
     public PedidoDTO create(PedidoDTO dto) {
-        return toDTO(repository.save(toEntity(dto)));
+        Pedido pedido = converter.toEntity(dto);
+        return converter.toPedidoDTO(repository.save(pedido));
     }
 
     public PedidoDTO update(Long id, PedidoDTO dto) {
-        Pedido entity = toEntity(dto);
-        entity.setId(id);
-        return toDTO(repository.save(entity));
+        Pedido pedido = converter.toEntity(dto);
+        pedido.setId(id);
+        return converter.toPedidoDTO(repository.save(pedido));
     }
 
     public void delete(Long id) {
-        repository.delete(repository.findById(id).orElseThrow(() -> new RuntimeException("Pedido não encontrado")));
+        Pedido pedido = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
+        repository.delete(pedido);
     }
 
     public PedidoDTO criarPedidoParaConta(Long contaId, PedidoDTO pedidoDTO) {
         Conta conta = contaRepository.findById(contaId)
                 .orElseThrow(() -> new RuntimeException("Conta não encontrada"));
 
-        Pedido pedido = toEntity(pedidoDTO);
+        Pedido pedido = converter.toEntity(pedidoDTO);
         pedido.setConta(conta);
         pedido.setHoraPedido(LocalDateTime.now());
 
-        return toDTO(repository.save(pedido));
+        return converter.toPedidoDTO(repository.save(pedido));
     }
 
     public PedidoDTO adicionarItem(Long pedidoId, Long itemId) {
@@ -62,8 +80,7 @@ public class PedidoService {
                 .orElseThrow(() -> new RuntimeException("Item não encontrado"));
 
         pedido.getItens().add(item);
-
-        return toDTO(repository.save(pedido));
+        return converter.toPedidoDTO(repository.save(pedido));
     }
 
     public PedidoDTO marcarComoEntregue(Long pedidoId) {
@@ -71,14 +88,13 @@ public class PedidoService {
                 .orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
 
         pedido.setHoraEntrega(LocalDateTime.now());
-
-        return toDTO(repository.save(pedido));
+        return converter.toPedidoDTO(repository.save(pedido));
     }
 
     public List<PedidoDTO> listarPorConta(Long contaId) {
         return repository.findByContaId(contaId)
                 .stream()
-                .map(this::toDTO)
+                .map(converter::toPedidoDTO)
                 .collect(Collectors.toList());
     }
 
@@ -101,16 +117,14 @@ public class PedidoService {
     }
 
     public PedidoDTO criarPedido(PedidoDTO dto) {
-        Pedido pedido = EntityDTOConverter.toEntity(dto);
-        pedido = repository.save(pedido);
-        return EntityDTOConverter.toPedidoDTO(pedido);
+        Pedido pedido = converter.toEntity(dto);
+        return converter.toPedidoDTO(repository.save(pedido));
     }
-    
+
     public PedidoDTO atualizarPedido(Long id, PedidoDTO dto) {
-        Pedido pedido = EntityDTOConverter.toEntity(dto);
+        Pedido pedido = converter.toEntity(dto);
         pedido.setId(id);
-        pedido = repository.save(pedido);
-        return EntityDTOConverter.toPedidoDTO(pedido);
+        return converter.toPedidoDTO(repository.save(pedido));
     }
 
     public void excluirPedido(Long id) {
@@ -120,9 +134,10 @@ public class PedidoService {
     }
 
     public List<PedidoDTO> buscarTodos() {
-        return repository.findAll().stream()
-                .map(EntityDTOConverter::toPedidoDTO)
-                .toList();
+        return repository.findAll()
+                .stream()
+                .map(converter::toPedidoDTO)
+                .collect(Collectors.toList());
     }
 
 }

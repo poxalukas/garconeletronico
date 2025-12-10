@@ -1,8 +1,11 @@
 package com.ufg.garcomeletronico.services;
 
+import com.ufg.garcomeletronico.converters.EntityDTOConverter;
 import com.ufg.garcomeletronico.dto.PagamentoDTO;
 import com.ufg.garcomeletronico.entities.Pagamento;
 import com.ufg.garcomeletronico.repositories.PagamentoRepository;
+import jakarta.persistence.Converter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,6 +14,9 @@ import java.util.List;
 public class PagamentoService {
 
     private final PagamentoRepository repository;
+
+    @Autowired
+    private EntityDTOConverter converter;
 
     public PagamentoService(PagamentoRepository repository) {
         this.repository = repository;
@@ -67,18 +73,4 @@ public class PagamentoService {
                 .orElseThrow(() -> new RuntimeException("Pagamento não encontrado"));
         repository.delete(p);
     }
-
-    public PagamentoDTO criarPagamento(PagamentoDTO dto) {
-        Pagamento p = EntityDTOConverter.toEntity(dto);
-        p = repository.save(p);
-        return EntityDTOConverter.toPagamentoDTO(p);
-    }
-
-    public PagamentoDTO atualizarPagamento(Long id, PagamentoDTO dto) {
-        Pagamento p = EntityDTOConverter.toEntity(dto);
-        p.setId(id);
-        p = repository.save(p);
-        return EntityDTOConverter.toPagamentoDTO(p);
-    }
-
 }

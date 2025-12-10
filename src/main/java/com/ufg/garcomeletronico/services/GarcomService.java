@@ -86,7 +86,6 @@ public class GarcomService {
     private Garcom toEntity(GarcomDTO dto) {
         if (dto == null) return null;
         Garcom g = new Garcom();
-        g.setId(dto.getId());
         g.setNome(dto.getNome());
         return g;
     }

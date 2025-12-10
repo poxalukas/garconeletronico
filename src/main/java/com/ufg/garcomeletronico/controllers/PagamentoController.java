@@ -43,16 +43,6 @@ public class PagamentoController {
 
     @DeleteMapping("/excluirFormaPagamento/{id}")
     public void excluirFormaPagamento(@PathVariable Long id) {
-        pagamentoService.excluirPagamento(id);
-    }
-
-    @PostMapping("/criarFormaPagamento")
-    public PagamentoDTO criarFormaPagamento(@RequestBody PagamentoDTO dto) {
-        return pagamentoService.criarPagamento(dto);
-    }
-
-    @PutMapping("/atualizarFormaPagamento/{id}")
-    public PagamentoDTO atualizarFormaPagamento(@PathVariable Long id, @RequestBody PagamentoDTO dto) {
-        return pagamentoService.atualizarPagamento(id, dto);
+        service.excluirPagamento(id);
     }
 }

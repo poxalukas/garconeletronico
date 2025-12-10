@@ -6,6 +6,7 @@ import com.ufg.garcomeletronico.repositories.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.stream.Collectors;
 import java.util.List;
 
@@ -30,6 +31,7 @@ public class ClienteService {
     public ClienteDTO create(ClienteDTO dto) {
         Cliente c = new Cliente();
         c.setNome(dto.getNome());
+        c.setHoraChegada(LocalDateTime.now());
         c = repository.save(c);
         return toDTO(c);
     }

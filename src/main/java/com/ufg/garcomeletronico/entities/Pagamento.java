@@ -4,6 +4,7 @@ import com.ufg.garcomeletronico.enums.TipoPagamentoEnum;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
@@ -23,4 +24,6 @@ public class Pagamento {
     private Integer numeroTransacao;
 
     private Integer numeroCheque;
+
+    private BigDecimal valorPago;
 }

@@ -12,6 +12,7 @@ import com.ufg.garcomeletronico.repositories.PagamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -28,6 +29,10 @@ public class ContaService {
 
     @Autowired
     private PagamentoRepository pagamentoRepository;
+
+
+    @Autowired
+    private EntityDTOConverter converter;
 
 
     // -------------------- CRUD --------------------
@@ -47,19 +52,36 @@ public class ContaService {
 
     public ContaDTO create(ContaDTO dto) {
         Conta entity = toEntity(dto);
+//        conta.setValorTotal(calcularValorTotal(conta));
+
         entity = repository.save(entity);
         return toDTO(entity);
     }
 
     public ContaDTO update(Long id, ContaDTO dto) {
+
         Conta existing = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Conta não encontrada"));
 
-        Conta updated = toEntity(dto);
-        updated.setId(id);
+        existing.setNome(dto.getNome());
 
-        return toDTO(repository.save(updated));
+        if (dto.getMesa() != null) {
+            existing.setMesa(converter.toEntity(dto.getMesa()));
+        }
+
+        if (dto.getPedidos() != null) {
+            existing.setPedidos(converter.toPedidosEntity(dto.getPedidos()));
+        }
+
+        if (dto.getPedidos() != null) {
+            existing.setPedidos(converter.toPedidosEntity(dto.getPedidos()));
+        }
+
+        existing = repository.save(existing);
+
+        return toDTO(existing);
     }
+
 
     public void delete(Long id) {
         repository.deleteById(id);
@@ -81,7 +103,7 @@ public class ContaService {
 
         return conta.getPedidos()
                 .stream()
-                .map(EntityDTOConverter::toPedidoDTO)
+                .map(converter::toPedidoDTO)
                 .toList();
     }
 
@@ -143,9 +165,9 @@ public class ContaService {
         return new ContaDTO(
                 c.getId(),
                 c.getNome(),
-                toMesaDTO(c.getMesa()),
-                toPedidosDTO(c.getPedidos()),
-                toPagamentoDTO(c.getPagamento())
+                c.getMesa() != null ? converter.toMesaDTO(c.getMesa()) : null,
+                c.getPedidos() != null ? converter.toPedidosDTO(c.getPedidos()) : List.of(),
+                c.getPagamento() != null ? converter.toPagamentoDTO(c.getPagamento()) : null
         );
     }
 
@@ -157,5 +179,22 @@ public class ContaService {
         c.setNome(dto.getNome());
         return c;
     }
+//    private BigDecimal calcularValorTotal(Conta conta) {
+//        BigDecimal totalPedidos = BigDecimal.ZERO;
+//        BigDecimal totalPagamentos = BigDecimal.ZERO;
+//
+//        if (conta.getPedidos() != null) {
+//            totalPedidos = conta.getPedidos().stream()
+//                    .map(p -> p.getValorTotal() != null ? p.getValorTotal() : BigDecimal.ZERO)
+//                    .reduce(BigDecimal.ZERO, BigDecimal::add);
+//        }
+//
+//        if (conta.getPagamento() != null && conta.getPagamento().getValorPago() != null) {
+//            totalPagamentos = conta.getPagamento().getValorPago();
+//        }
+//
+//        return totalPedidos.subtract(totalPagamentos);
+//    }
+
 
 }

@@ -1,5 +1,6 @@
 package com.ufg.garcomeletronico.services;
 
+import com.ufg.garcomeletronico.converters.EntityDTOConverter;
 import com.ufg.garcomeletronico.dto.CategoriaDTO;
 import com.ufg.garcomeletronico.dto.ItemCardapioDTO;
 import com.ufg.garcomeletronico.entities.Categoria;
@@ -8,6 +9,8 @@ import com.ufg.garcomeletronico.repositories.ItemCardapioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -15,6 +18,9 @@ public class ItemCardapioService {
 
     @Autowired
     private ItemCardapioRepository repository;
+
+    @Autowired
+    private EntityDTOConverter converter;
 
     public List<ItemCardapioDTO> findAll() {
         return repository.findAll()
@@ -82,10 +88,24 @@ public class ItemCardapioService {
         return item;
     }
 
-    // Listar itens do cardápio filtrando por ingredientes
     public List<ItemCardapioDTO> listarPorIngredientes(List<String> ingredientes) {
-        return repository.findByIngredientesIn(ingredientes).stream()
-            .map(EntityDTOConverter::toItemCardapioDTO)
-            .toList();
+        if (ingredientes == null || ingredientes.isEmpty()) {
+            throw new IllegalArgumentException("A lista de ingredientes não pode ser nula ou vazia");
+        }
+
+        List<ItemCardapio> resultado = new ArrayList<>();
+
+        for (String ingrediente : ingredientes) {
+            resultado.addAll(repository.findByIngrediente(ingrediente.toLowerCase()));
+        }
+
+        List<ItemCardapio> itensUnicos = resultado.stream()
+                .distinct()
+                .toList();
+
+        return itensUnicos.stream()
+                .map(converter::toItemCardapioDTO)
+                .toList();
     }
+
 }
